@@ -4,11 +4,11 @@ import '@testing-library/jest-dom';
 import axios from 'axios';
 import Home from './page';
 
-// Mock axios
+
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
-// Mock components
+
 jest.mock('@/components/AudioUploader', () => {
   return function MockAudioUploader({ onFileSelect, onSubmit, isLoading, selectedFile }: any) {
     return (
@@ -52,7 +52,7 @@ jest.mock('@/components/Header', () => {
 describe('Home Page', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    // Reset mocks before each test
+
     mockedAxios.post.mockReset();
   });
 
@@ -64,7 +64,7 @@ describe('Home Page', () => {
   });
 
   test('handles file selection', async () => {
-    // Pre-configure axios mock to return a successful response
+    
     mockedAxios.post.mockResolvedValueOnce({
       data: {
         emotion: 'bahagia',
@@ -75,11 +75,11 @@ describe('Home Page', () => {
 
     render(<Home />);
     
-    // Use fireEvent directly without act - we'll wait for the effects later
+  
     fireEvent.click(screen.getByTestId('select-file-button'));
     fireEvent.click(screen.getByTestId('submit-button'));
     
-    // Wait for the async effects to complete
+
     await waitFor(() => {
       expect(mockedAxios.post).toHaveBeenCalled();
     });
@@ -88,16 +88,16 @@ describe('Home Page', () => {
   test('handles file removal', async () => {
     render(<Home />);
     
-    // First select a file
+ 
     fireEvent.click(screen.getByTestId('select-file-button'));
     
-    // Verify submit button is enabled
+    
     expect(screen.getByTestId('submit-button')).not.toBeDisabled();
     
-    // Then remove it
+   
     fireEvent.click(screen.getByTestId('remove-file-button'));
     
-    // Submit button should be disabled
+   
     expect(screen.getByTestId('submit-button')).toBeDisabled();
   });
 
@@ -109,13 +109,13 @@ describe('Home Page', () => {
     
     render(<Home />);
     
-    // Select file and submit
+ 
     fireEvent.click(screen.getByTestId('select-file-button'));
     fireEvent.click(screen.getByTestId('submit-button'));
     
-    // Now look for the generic error message that the component actually displays
+   
     await waitFor(() => {
-      // Use a more flexible text matcher by function
+     
       const errorElement = screen.getByText((content) => {
         return content.includes('An unexpected error occurred');
       });
@@ -139,25 +139,23 @@ describe('Home Page', () => {
       }
     };
     
-    // Ensure this mock is correctly resolved
+  
     mockedAxios.post.mockImplementationOnce(() => {
       return Promise.resolve(mockResponse);
     });
     
     render(<Home />);
     
-    // Trigger file selection and form submission
+
     fireEvent.click(screen.getByTestId('select-file-button'));
     fireEvent.click(screen.getByTestId('submit-button'));
     
-    // Wait for the results to appear - need to check for text instead of testid
-    // since the MockEmotionResult component isn't being rendered
     await waitFor(() => {
-      // Check for the Analysis Results heading that appears when results are shown
+    
       expect(screen.getByText('Analysis Results')).toBeInTheDocument();
-      // And then verify our mock component is there with the emotion text
+      
       expect(screen.getByTestId('emotion-result')).toBeInTheDocument();
       expect(screen.getByText('bahagia')).toBeInTheDocument();
-    }, { timeout: 3000 }); // Increase timeout to give more time for component to update
+    }, { timeout: 3000 }); 
   });
 });

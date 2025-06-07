@@ -19,7 +19,7 @@ const emotionData: Record<string, { color: string; emoji: string }> = {
 };
 
 const EmotionResult: React.FC<EmotionResultProps> = ({ result }) => {
-  // Sort probabilities in descending order
+  
   const sortedEmotions = Object.entries(result.probabilities)
     .sort((a, b) => b[1] - a[1]);
 

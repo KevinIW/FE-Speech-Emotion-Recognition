@@ -20,7 +20,7 @@ describe('EmotionResult Component', () => {
   test('renders the primary emotion correctly', () => {
     render(<EmotionResult result={mockResult} />);
     
-    // Use more specific selector to target the heading with the emotion
+
     expect(screen.getByRole('heading', { name: 'bahagia' })).toBeInTheDocument();
     expect(screen.getByText(/Confidence: 85.00%/i)).toBeInTheDocument();
   });
@@ -34,7 +34,7 @@ describe('EmotionResult Component', () => {
   test('renders all emotion probabilities correctly', () => {
     render(<EmotionResult result={mockResult} />);
     
-    // Check percentages appear in the output
+   
     expect(screen.getByText('85.0%')).toBeInTheDocument();
     expect(screen.getByText('5.0%')).toBeInTheDocument();
     expect(screen.getByText('3.0%')).toBeInTheDocument();

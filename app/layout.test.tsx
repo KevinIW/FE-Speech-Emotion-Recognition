@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import RootLayout from './layout';
 
-// Mock Inter font to prevent Next.js font loading errors
+
 jest.mock('next/font/google', () => ({
   Inter: () => ({
     className: 'mocked-inter-class',

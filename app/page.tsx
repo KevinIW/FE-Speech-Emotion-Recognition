@@ -6,10 +6,10 @@ import AudioUploader from '@/components/AudioUploader';
 import EmotionResult from '@/components/EmotionResult';
 import Header from '@/components/Header';
 
-// Define the API URL - change this to your deployed API URL when ready
+
 const API_URL = 'http://localhost:8000';
 
-// Define the response type
+
 interface PredictionResponse {
   emotion: string;
   confidence: number;
