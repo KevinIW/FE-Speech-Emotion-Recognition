@@ -67,7 +67,7 @@ To use the Speech Emotion Recognition application:
 
 ## Related Projects
 
-- [Backend model repository](https://github.com/iqzaardiansyah/Speech-Emotion-Recognition)
+- [Backend model repository](https://github.com/KevinIW/Speech-Emotion-Recognition)
 - [Trained model on HuggingFace](https://huggingface.co/Miracle12345/Speech-Emotion-Recognition)
 
 ## Credits
